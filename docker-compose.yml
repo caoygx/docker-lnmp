@@ -3,7 +3,7 @@ nginx:
   image: nginx:latest
   ports:
     - "80:80"
-    - "443:443"
+#    - "443:443"
   volumes:
     # app
     - ./app/src:/usr/share/nginx/html
