@@ -18,5 +18,12 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
 
-RUN pecl install swoole
-RUN docker-php-ext-enable swoole 
+
+# install swoole
+RUN curl -o /tmp/swoole-1.9.0.tgz  http://pecl.php.net/get/swoole-1.9.0.tgz
+RUN cd /tmp && tar zxvf swoole-1.9.0.tgz && cd swoole-1.9.0 && \
+phpize && ./configure && make && make install && \
+cd /tmp && rm -rf /tmp/swoole-1.9.0.tgz
+#RUN pecl install swoole
+RUN docker-php-ext-enable swoole
+
